@@ -7,6 +7,51 @@ import java.util.*;
 
 public class Main {
 
+         
+          public static void coin_changing_minimum_number_of_coins() {
+
+        int tot = 11;
+        int[] cois = {1, 5, 6, 8};
+
+
+        int[][] buf = new int[cois.length][tot + 1];
+
+
+        for (int c = 0; c < buf.length; ++c) {
+
+            int[] tots_for_coin = buf[c];
+
+            int coin = cois[c];
+
+            for (int t = 0; t < tots_for_coin.length; ++t) {
+
+                if (t == 0) {
+                    //used as dummy
+                    tots_for_coin[t] = 0;
+                    continue;
+                }
+                if (coin == 1) {
+                    tots_for_coin[t] = t;
+                    continue;
+                }
+
+                if (coin > t) {
+                    tots_for_coin[t] = buf[c - 1][t];
+                    continue;
+                }
+                //buf[c-1][t]+buf[c][t-coin]
+                tots_for_coin[t] = Math.min(buf[c-1][t], 1+buf[c][t-coin]);//!!!!
+
+            }
+
+        }
+
+
+        System.out.println(buf[cois.length - 1][tot]);
+
+
+    }
+         
          public static void coin_changing_number_of_ways() {
 
         int tot = 5;
