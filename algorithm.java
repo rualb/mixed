@@ -7,7 +7,49 @@ import java.util.*;
 
 public class Main {
 
-        
+         public static void coin_changing_number_of_ways() {
+
+        int tot = 5;
+        int[] cois = {1, 2, 3};
+
+
+        int[][] buf = new int[cois.length][tot + 1];
+
+        for (int c = 0; c < buf.length; ++c) {
+
+            int[] tots_for_coin = buf[c];
+
+            int coin = cois[c];
+
+            for (int t = 0; t < tots_for_coin.length; ++t) {
+
+                if(t == 0)
+                {
+                    //used as dummy
+                    tots_for_coin[t] = 1;
+                    continue;
+                }
+                if (coin == 1) {
+                    tots_for_coin[t] = 1;
+                    continue;
+                }
+                if(coin > t)
+                {
+                    tots_for_coin[t] = buf[c-1][t];
+                    continue;
+                }
+                //
+                tots_for_coin[t] = buf[c-1][t]+buf[c][t-coin];
+
+            }
+
+        }
+
+
+        System.out.println(buf[cois.length-1][tot]);
+
+
+    }
         public static void longest_increasing_subsequence_via_dyn() {
 
         Integer[] arr = {3, 4, -1, 0, 6, 2, 3};
